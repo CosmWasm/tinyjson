@@ -2,14 +2,14 @@ all: test
 
 clean:
 	rm -rf bin
-	rm -rf tests/*_easyjson.go
-	rm -rf benchmark/*_easyjson.go
+	rm -rf tests/*_tinyjson.go
+	rm -rf benchmark/*_tinyjson.go
 
 build:
-	go build -i -o ./bin/easyjson ./easyjson
+	go build -o ./bin/tinyjson ./tinyjson
 
 generate: build
-	bin/easyjson -stubs \
+	bin/tinyjson -stubs \
 		./tests/snake.go \
 		./tests/data.go \
 		./tests/omitempty.go \
@@ -27,13 +27,13 @@ generate: build
 		./tests/intern.go \
 		./tests/nocopy.go \
 		./tests/escaping.go
-	bin/easyjson -all \
+	bin/tinyjson -all \
 		./tests/data.go \
  		./tests/nothing.go \
  		./tests/errors.go \
  		./tests/html.go \
  		./tests/type_declaration_skip.go
-	bin/easyjson \
+	bin/tinyjson \
 		./tests/nested_easy.go \
 		./tests/named_type.go \
 		./tests/custom_map_key_type.go \
@@ -47,11 +47,11 @@ generate: build
 		./tests/nocopy.go \
 		./tests/escaping.go \
 		./tests/nested_marshaler.go
-	bin/easyjson -snake_case ./tests/snake.go
-	bin/easyjson -omit_empty ./tests/omitempty.go
-	bin/easyjson -build_tags=use_easyjson -disable_members_unescape ./benchmark/data.go
-	bin/easyjson -disallow_unknown_fields ./tests/disallow_unknown.go
-	bin/easyjson -disable_members_unescape ./tests/members_unescaped.go
+	bin/tinyjson -snake_case ./tests/snake.go
+	bin/tinyjson -omit_empty ./tests/omitempty.go
+	bin/tinyjson -build_tags=use_tinyjson -disable_members_unescape ./benchmark/data.go
+	bin/tinyjson -disallow_unknown_fields ./tests/disallow_unknown.go
+	bin/tinyjson -disable_members_unescape ./tests/members_unescaped.go
 
 test: generate
 	go test \
@@ -59,8 +59,8 @@ test: generate
 		./jlexer \
 		./gen \
 		./buffer
-	cd benchmark && go test -benchmem -tags use_easyjson -bench .
-	golint -set_exit_status ./tests/*_easyjson.go
+	cd benchmark && go test -benchmem -tags use_tinyjson -bench .
+	golint -set_exit_status ./tests/*_tinyjson.go
 
 bench-other: generate
 	cd benchmark && make
