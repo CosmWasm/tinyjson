@@ -63,7 +63,7 @@ func (g *Generator) genTypeDecoder(t reflect.Type, out string, tags fieldTags, i
 
 	unmarshalerIface := reflect.TypeOf((*tinyjson.Unmarshaler)(nil)).Elem()
 	if reflect.PtrTo(t).Implements(unmarshalerIface) {
-		fmt.Fprintln(g.out, ws+"("+out+").UnmarshalEasyJSON(in)")
+		fmt.Fprintln(g.out, ws+"("+out+").UnmarshalTinyJSON(in)")
 		return nil
 	}
 
@@ -301,7 +301,7 @@ func (g *Generator) genTypeDecoderNoCheck(t reflect.Type, out string, tags field
 	case reflect.Interface:
 		if t.NumMethod() != 0 {
 			if g.interfaceIsEasyjsonUnmarshaller(t) {
-				fmt.Fprintln(g.out, ws+out+".UnmarshalEasyJSON(in)")
+				fmt.Fprintln(g.out, ws+out+".UnmarshalTinyJSON(in)")
 			} else if g.interfaceIsJsonUnmarshaller(t) {
 				fmt.Fprintln(g.out, ws+out+".UnmarshalJSON(in.Raw())")
 			} else {
@@ -309,7 +309,7 @@ func (g *Generator) genTypeDecoderNoCheck(t reflect.Type, out string, tags field
 			}
 		} else {
 			fmt.Fprintln(g.out, ws+"if m, ok := "+out+".(tinyjson.Unmarshaler); ok {")
-			fmt.Fprintln(g.out, ws+"m.UnmarshalEasyJSON(in)")
+			fmt.Fprintln(g.out, ws+"m.UnmarshalTinyJSON(in)")
 			fmt.Fprintln(g.out, ws+"} else if m, ok := "+out+".(json.Unmarshaler); ok {")
 			fmt.Fprintln(g.out, ws+"_ = m.UnmarshalJSON(in.Raw())")
 			fmt.Fprintln(g.out, ws+"} else {")
@@ -575,8 +575,8 @@ func (g *Generator) genStructUnmarshaler(t reflect.Type) error {
 		fmt.Fprintln(g.out, "}")
 	}
 
-	fmt.Fprintln(g.out, "// UnmarshalEasyJSON supports tinyjson.Unmarshaler interface")
-	fmt.Fprintln(g.out, "func (v *"+typ+") UnmarshalEasyJSON(l *jlexer.Lexer) {")
+	fmt.Fprintln(g.out, "// UnmarshalTinyJSON supports tinyjson.Unmarshaler interface")
+	fmt.Fprintln(g.out, "func (v *"+typ+") UnmarshalTinyJSON(l *jlexer.Lexer) {")
 	fmt.Fprintln(g.out, "  "+fname+"(l, v)")
 	fmt.Fprintln(g.out, "}")
 

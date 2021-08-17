@@ -16,10 +16,10 @@ type StructWithMarshaler struct {
 	Value int
 }
 
-func (s *StructWithMarshaler) UnmarshalEasyJSON(w *jlexer.Lexer) {
+func (s *StructWithMarshaler) UnmarshalTinyJSON(w *jlexer.Lexer) {
 	s.Value = w.Int()
 }
 
-func (s *StructWithMarshaler) MarshalEasyJSON(w *jwriter.Writer) {
+func (s *StructWithMarshaler) MarshalTinyJSON(w *jwriter.Writer) {
 	w.Int(s.Value)
 }

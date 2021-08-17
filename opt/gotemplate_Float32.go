@@ -30,8 +30,8 @@ func (v Float32) Get(deflt float32) float32 {
 	return v.V
 }
 
-// MarshalEasyJSON does JSON marshaling using tinyjson interface.
-func (v Float32) MarshalEasyJSON(w *jwriter.Writer) {
+// MarshalTinyJSON does JSON marshaling using tinyjson interface.
+func (v Float32) MarshalTinyJSON(w *jwriter.Writer) {
 	if v.Defined {
 		w.Float32(v.V)
 	} else {
@@ -39,8 +39,8 @@ func (v Float32) MarshalEasyJSON(w *jwriter.Writer) {
 	}
 }
 
-// UnmarshalEasyJSON does JSON unmarshaling using tinyjson interface.
-func (v *Float32) UnmarshalEasyJSON(l *jlexer.Lexer) {
+// UnmarshalTinyJSON does JSON unmarshaling using tinyjson interface.
+func (v *Float32) UnmarshalTinyJSON(l *jlexer.Lexer) {
 	if l.IsNull() {
 		l.Skip()
 		*v = Float32{}
@@ -53,14 +53,14 @@ func (v *Float32) UnmarshalEasyJSON(l *jlexer.Lexer) {
 // MarshalJSON implements a standard json marshaler interface.
 func (v Float32) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	v.MarshalEasyJSON(&w)
+	v.MarshalTinyJSON(&w)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // UnmarshalJSON implements a standard json unmarshaler interface.
 func (v *Float32) UnmarshalJSON(data []byte) error {
 	l := jlexer.Lexer{Data: data}
-	v.UnmarshalEasyJSON(&l)
+	v.UnmarshalTinyJSON(&l)
 	return l.Error()
 }
 

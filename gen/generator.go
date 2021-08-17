@@ -15,7 +15,7 @@ import (
 
 const pkgWriter = "github.com/CosmWasm/tinyjson/jwriter"
 const pkgLexer = "github.com/CosmWasm/tinyjson/jlexer"
-const pkgEasyJSON = "github.com/CosmWasm/tinyjson"
+const pkgTinyJSON = "github.com/CosmWasm/tinyjson"
 
 // FieldNamer defines a policy for generating names for struct fields.
 type FieldNamer interface {
@@ -63,7 +63,7 @@ func NewGenerator(filename string) *Generator {
 		imports: map[string]string{
 			pkgWriter:       "jwriter",
 			pkgLexer:        "jlexer",
-			pkgEasyJSON:     "tinyjson",
+			pkgTinyJSON:     "tinyjson",
 			"encoding/json": "json",
 		},
 		fieldNamer:    DefaultFieldNamer{},

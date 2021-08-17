@@ -9,8 +9,8 @@ import (
 // null) that is extracted without parsing and output as is during marshaling.
 type RawMessage []byte
 
-// MarshalEasyJSON does JSON marshaling using tinyjson interface.
-func (v *RawMessage) MarshalEasyJSON(w *jwriter.Writer) {
+// MarshalTinyJSON does JSON marshaling using tinyjson interface.
+func (v *RawMessage) MarshalTinyJSON(w *jwriter.Writer) {
 	if len(*v) == 0 {
 		w.RawString("null")
 	} else {
@@ -18,8 +18,8 @@ func (v *RawMessage) MarshalEasyJSON(w *jwriter.Writer) {
 	}
 }
 
-// UnmarshalEasyJSON does JSON unmarshaling using tinyjson interface.
-func (v *RawMessage) UnmarshalEasyJSON(l *jlexer.Lexer) {
+// UnmarshalTinyJSON does JSON unmarshaling using tinyjson interface.
+func (v *RawMessage) UnmarshalTinyJSON(l *jlexer.Lexer) {
 	*v = RawMessage(l.Raw())
 }
 
