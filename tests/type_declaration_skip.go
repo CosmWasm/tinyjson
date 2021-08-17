@@ -1,6 +1,6 @@
 package tests
 
-//easyjson:skip
+//tinyjson:skip
 type TypeSkipped struct {
 	Value string
 }

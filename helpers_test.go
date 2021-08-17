@@ -1,4 +1,4 @@
-package easyjson
+package tinyjson
 
 import "testing"
 

@@ -387,7 +387,7 @@ var optsString = `{` +
 	`}`
 
 type Raw struct {
-	Field  easyjson.RawMessage
+	Field  tinyjson.RawMessage
 	Field2 string
 }
 
@@ -673,14 +673,14 @@ var deepNestOptionalString = `{` +
 	`]` +
 	`}`
 
-//easyjson:json
+//tinyjson:json
 type Ints []int
 
 var IntsValue = Ints{1, 2, 3, 4, 5}
 
 var IntsString = `[1,2,3,4,5]`
 
-//easyjson:json
+//tinyjson:json
 type MapStringString map[string]string
 
 var mapStringStringValue = MapStringString{"a": "b"}
@@ -698,12 +698,12 @@ type RequiredOptionalMap struct {
 	NoOmitEmptyMap map[int]string `json:"noe_map,!omitempty"`
 }
 
-//easyjson:json
+//tinyjson:json
 type EncodingFlagsTestMap struct {
 	F map[string]string
 }
 
-//easyjson:json
+//tinyjson:json
 type EncodingFlagsTestSlice struct {
 	F []string
 }
@@ -722,43 +722,43 @@ type EmbeddedStruct struct {
 var structWithInterfaceString = `{"f1":1,"f2":{"f1":11,"f2":"22"},"f3":"3"}`
 var structWithInterfaceValueFilled = StructWithInterface{1, &EmbeddedStruct{11, "22"}, "3"}
 
-//easyjson:json
+//tinyjson:json
 type MapIntString map[int]string
 
 var mapIntStringValue = MapIntString{3: "hi"}
 var mapIntStringValueString = `{"3":"hi"}`
 
-//easyjson:json
+//tinyjson:json
 type MapInt32String map[int32]string
 
 var mapInt32StringValue = MapInt32String{-354634382: "life"}
 var mapInt32StringValueString = `{"-354634382":"life"}`
 
-//easyjson:json
+//tinyjson:json
 type MapInt64String map[int64]string
 
 var mapInt64StringValue = MapInt64String{-3546343826724305832: "life"}
 var mapInt64StringValueString = `{"-3546343826724305832":"life"}`
 
-//easyjson:json
+//tinyjson:json
 type MapUintString map[uint]string
 
 var mapUintStringValue = MapUintString{42: "life"}
 var mapUintStringValueString = `{"42":"life"}`
 
-//easyjson:json
+//tinyjson:json
 type MapUint32String map[uint32]string
 
 var mapUint32StringValue = MapUint32String{354634382: "life"}
 var mapUint32StringValueString = `{"354634382":"life"}`
 
-//easyjson:json
+//tinyjson:json
 type MapUint64String map[uint64]string
 
 var mapUint64StringValue = MapUint64String{3546343826724305832: "life"}
 var mapUint64StringValueString = `{"3546343826724305832":"life"}`
 
-//easyjson:json
+//tinyjson:json
 type MapUintptrString map[uintptr]string
 
 var mapUintptrStringValue = MapUintptrString{272679208: "obj"}
@@ -766,13 +766,13 @@ var mapUintptrStringValueString = `{"272679208":"obj"}`
 
 type MyInt int
 
-//easyjson:json
+//tinyjson:json
 type MapMyIntString map[MyInt]string
 
 var mapMyIntStringValue = MapMyIntString{MyInt(42): "life"}
 var mapMyIntStringValueString = `{"42":"life"}`
 
-//easyjson:json
+//tinyjson:json
 type IntKeyedMapStruct struct {
 	Foo MapMyIntString            `json:"foo"`
 	Bar map[int16]MapUint32String `json:"bar"`
@@ -789,7 +789,7 @@ var intKeyedMapStructValueString = `{` +
 
 type IntArray [2]int
 
-//easyjson:json
+//tinyjson:json
 type IntArrayStruct struct {
 	Pointer *IntArray `json:"pointer"`
 	Value   IntArray  `json:"value"`
@@ -807,14 +807,14 @@ var intArrayStructValueString = `{` +
 
 type MyUInt8 uint8
 
-//easyjson:json
+//tinyjson:json
 type MyUInt8Slice []MyUInt8
 
 var myUInt8SliceValue = MyUInt8Slice{1, 2, 3, 4, 5}
 
 var myUInt8SliceString = `[1,2,3,4,5]`
 
-//easyjson:json
+//tinyjson:json
 type MyUInt8Array [2]MyUInt8
 
 var myUInt8ArrayValue = MyUInt8Array{1, 2}

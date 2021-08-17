@@ -1,4 +1,4 @@
-package easyjson
+package tinyjson
 
 import (
 	"github.com/CosmWasm/tinyjson/jlexer"
@@ -9,7 +9,7 @@ import (
 // null) that is extracted without parsing and output as is during marshaling.
 type RawMessage []byte
 
-// MarshalEasyJSON does JSON marshaling using easyjson interface.
+// MarshalEasyJSON does JSON marshaling using tinyjson interface.
 func (v *RawMessage) MarshalEasyJSON(w *jwriter.Writer) {
 	if len(*v) == 0 {
 		w.RawString("null")
@@ -18,7 +18,7 @@ func (v *RawMessage) MarshalEasyJSON(w *jwriter.Writer) {
 	}
 }
 
-// UnmarshalEasyJSON does JSON unmarshaling using easyjson interface.
+// UnmarshalEasyJSON does JSON unmarshaling using tinyjson interface.
 func (v *RawMessage) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	*v = RawMessage(l.Raw())
 }
@@ -39,7 +39,7 @@ func (v RawMessage) MarshalJSON() ([]byte, error) {
 	return v, nil
 }
 
-// IsDefined is required for integration with omitempty easyjson logic.
+// IsDefined is required for integration with omitempty tinyjson logic.
 func (v *RawMessage) IsDefined() bool {
 	return len(*v) > 0
 }

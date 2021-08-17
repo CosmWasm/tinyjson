@@ -1,6 +1,6 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type DisallowUnknown struct {
 	FieldOne string `json:"field_one"`
 }

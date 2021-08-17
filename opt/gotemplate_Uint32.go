@@ -30,7 +30,7 @@ func (v Uint32) Get(deflt uint32) uint32 {
 	return v.V
 }
 
-// MarshalEasyJSON does JSON marshaling using easyjson interface.
+// MarshalEasyJSON does JSON marshaling using tinyjson interface.
 func (v Uint32) MarshalEasyJSON(w *jwriter.Writer) {
 	if v.Defined {
 		w.Uint32(v.V)
@@ -39,7 +39,7 @@ func (v Uint32) MarshalEasyJSON(w *jwriter.Writer) {
 	}
 }
 
-// UnmarshalEasyJSON does JSON unmarshaling using easyjson interface.
+// UnmarshalEasyJSON does JSON unmarshaling using tinyjson interface.
 func (v *Uint32) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	if l.IsNull() {
 		l.Skip()

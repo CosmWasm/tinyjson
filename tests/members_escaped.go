@@ -1,6 +1,6 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type MembersEscaped struct {
 	A string `json:"漢語"`
 }

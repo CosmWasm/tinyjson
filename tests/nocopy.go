@@ -1,6 +1,6 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type NocopyStruct struct {
 	A string `json:"a"`
 	B string `json:"b,nocopy"`

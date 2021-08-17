@@ -93,11 +93,11 @@ func TestUnmarshal(t *testing.T) {
 
 func TestRawMessageSTD(t *testing.T) {
 	type T struct {
-		F    easyjson.RawMessage
-		Fnil easyjson.RawMessage
+		F    tinyjson.RawMessage
+		Fnil tinyjson.RawMessage
 	}
 
-	val := T{F: easyjson.RawMessage([]byte(`"test"`))}
+	val := T{F: tinyjson.RawMessage([]byte(`"test"`))}
 	str := `{"F":"test","Fnil":null}`
 
 	data, err := json.Marshal(val)
@@ -109,7 +109,7 @@ func TestRawMessageSTD(t *testing.T) {
 		t.Errorf("json.Marshal() = %v; want %v", got, str)
 	}
 
-	wantV := T{F: easyjson.RawMessage([]byte(`"test"`)), Fnil: easyjson.RawMessage([]byte("null"))}
+	wantV := T{F: tinyjson.RawMessage([]byte(`"test"`)), Fnil: tinyjson.RawMessage([]byte("null"))}
 	var gotV T
 
 	err = json.Unmarshal([]byte(str), &gotV)
@@ -123,7 +123,7 @@ func TestRawMessageSTD(t *testing.T) {
 
 func TestParseNull(t *testing.T) {
 	var got, want SubStruct
-	if err := easyjson.Unmarshal([]byte("null"), &got); err != nil {
+	if err := tinyjson.Unmarshal([]byte("null"), &got); err != nil {
 		t.Errorf("Unmarshal() error: %v", err)
 	}
 
@@ -161,7 +161,7 @@ func TestSpecialCases(t *testing.T) {
 
 func TestOverflowArray(t *testing.T) {
 	var a Arrays
-	err := easyjson.Unmarshal([]byte(arrayOverflowString), &a)
+	err := tinyjson.Unmarshal([]byte(arrayOverflowString), &a)
 	if err != nil {
 		t.Error(err)
 	}
@@ -172,7 +172,7 @@ func TestOverflowArray(t *testing.T) {
 
 func TestUnderflowArray(t *testing.T) {
 	var a Arrays
-	err := easyjson.Unmarshal([]byte(arrayUnderflowString), &a)
+	err := tinyjson.Unmarshal([]byte(arrayUnderflowString), &a)
 	if err != nil {
 		t.Error(err)
 	}
@@ -184,7 +184,7 @@ func TestUnderflowArray(t *testing.T) {
 func TestEncodingFlags(t *testing.T) {
 	for i, test := range []struct {
 		Flags jwriter.Flags
-		In    easyjson.Marshaler
+		In    tinyjson.Marshaler
 		Want  string
 	}{
 		{0, EncodingFlagsTestMap{}, `{"F":null}`},
@@ -197,12 +197,12 @@ func TestEncodingFlags(t *testing.T) {
 
 		data, err := w.BuildBytes()
 		if err != nil {
-			t.Errorf("[%v] easyjson.Marshal(%+v) error: %v", i, test.In, err)
+			t.Errorf("[%v] tinyjson.Marshal(%+v) error: %v", i, test.In, err)
 		}
 
 		v := string(data)
 		if v != test.Want {
-			t.Errorf("[%v] easyjson.Marshal(%+v) = %v; want %v", i, test.In, v, test.Want)
+			t.Errorf("[%v] tinyjson.Marshal(%+v) = %v; want %v", i, test.In, v, test.Want)
 		}
 	}
 
@@ -222,7 +222,7 @@ func TestNestedEasyJsonMarshal(t *testing.T) {
 		Slice: []interface{}{n["Slice1"], n["Slice2"]},
 		Map:   map[string]interface{}{"1": n["Map1"], "2": n["Map2"]},
 	}
-	easyjson.Marshal(ni)
+	tinyjson.Marshal(ni)
 
 	for k, v := range n {
 		if !v.EasilyMarshaled {
@@ -254,25 +254,25 @@ func TestNestedMarshaler(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(s2, s) {
-		t.Errorf("easyjson.Unmarshal() = %#v; want %#v", s2, s)
+		t.Errorf("tinyjson.Unmarshal() = %#v; want %#v", s2, s)
 	}
 }
 
 func TestUnmarshalStructWithEmbeddedPtrStruct(t *testing.T) {
 	var s = StructWithInterface{Field2: &EmbeddedStruct{}}
 	var err error
-	err = easyjson.Unmarshal([]byte(structWithInterfaceString), &s)
+	err = tinyjson.Unmarshal([]byte(structWithInterfaceString), &s)
 	if err != nil {
-		t.Errorf("easyjson.Unmarshal() error: %v", err)
+		t.Errorf("tinyjson.Unmarshal() error: %v", err)
 	}
 	if !reflect.DeepEqual(s, structWithInterfaceValueFilled) {
-		t.Errorf("easyjson.Unmarshal() = %#v; want %#v", s, structWithInterfaceValueFilled)
+		t.Errorf("tinyjson.Unmarshal() = %#v; want %#v", s, structWithInterfaceValueFilled)
 	}
 }
 
 func TestDisallowUnknown(t *testing.T) {
 	var d DisallowUnknown
-	err := easyjson.Unmarshal([]byte(disallowUnknownString), &d)
+	err := tinyjson.Unmarshal([]byte(disallowUnknownString), &d)
 	if err == nil {
 		t.Error("want error, got nil")
 	}
@@ -301,17 +301,17 @@ func TestMethodsNoGenerated(t *testing.T) {
 func TestNil(t *testing.T) {
 	var p *PrimitiveTypes
 
-	data, err := easyjson.Marshal(p)
+	data, err := tinyjson.Marshal(p)
 	if err != nil {
-		t.Errorf("easyjson.Marshal() error: %v", err)
+		t.Errorf("tinyjson.Marshal() error: %v", err)
 	}
 	if string(data) != "null" {
 		t.Errorf("Wanted null, got %q", string(data))
 	}
 
 	var b bytes.Buffer
-	if n, err := easyjson.MarshalToWriter(p, &b); err != nil || n != 4 {
-		t.Errorf("easyjson.MarshalToWriter() error: %v, written %d", err, n)
+	if n, err := tinyjson.MarshalToWriter(p, &b); err != nil || n != 4 {
+		t.Errorf("tinyjson.MarshalToWriter() error: %v, written %d", err, n)
 	}
 
 	if s := b.String(); s != "null" {
@@ -319,9 +319,9 @@ func TestNil(t *testing.T) {
 	}
 
 	w := httptest.NewRecorder()
-	started, written, err := easyjson.MarshalToHTTPResponseWriter(p, w)
+	started, written, err := tinyjson.MarshalToHTTPResponseWriter(p, w)
 	if !started || written != 4 || err != nil {
-		t.Errorf("easyjson.MarshalToHTTPResponseWriter() error: %v, written %d, started %t",
+		t.Errorf("tinyjson.MarshalToHTTPResponseWriter() error: %v, written %d, started %t",
 			err, written, started)
 	}
 

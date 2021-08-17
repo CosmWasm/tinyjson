@@ -1,11 +1,11 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type EscStringStruct struct {
 	A string `json:"a"`
 }
 
-//easyjson:json
+//tinyjson:json
 type EscIntStruct struct {
 	A int `json:"a,string"`
 }

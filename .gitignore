@@ -1,5 +1,5 @@
 .root
-*_easyjson.go
+*_tinyjson.go
 *.iml
 .idea
 *.swp
