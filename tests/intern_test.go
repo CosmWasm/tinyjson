@@ -3,7 +3,7 @@ package tests
 import (
 	"testing"
 
-	"github.com/mailru/easyjson"
+	"github.com/CosmWasm/tinyjson"
 )
 
 func TestStringIntern(t *testing.T) {
