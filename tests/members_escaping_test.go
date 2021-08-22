@@ -37,7 +37,7 @@ func TestMembersEscaping(t *testing.T) {
 
 	for i, c := range cases {
 		var esc MembersEscaped
-		err := easyjson.Unmarshal([]byte(c.data), &esc)
+		err := tinyjson.Unmarshal([]byte(c.data), &esc)
 		if err != nil {
 			t.Error(err)
 		}
@@ -46,7 +46,7 @@ func TestMembersEscaping(t *testing.T) {
 		}
 
 		var unesc MembersUnescaped
-		err = easyjson.Unmarshal([]byte(c.data), &unesc)
+		err = tinyjson.Unmarshal([]byte(c.data), &unesc)
 		if err != nil {
 			t.Error(err)
 		}

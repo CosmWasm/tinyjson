@@ -1,19 +1,19 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type (
 	GenDeclared1 struct {
 		Value string
 	}
 
-	// A gen declared easyjson struct with a comment
+	// A gen declared tinyjson struct with a comment
 	GenDeclaredWithComment struct {
 		Value string
 	}
 )
 
 type (
-	//easyjson:json
+	//tinyjson:json
 	TypeDeclared struct {
 		Value string
 	}

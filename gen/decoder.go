@@ -59,7 +59,7 @@ var customDecoders = map[string]string{}
 func (g *Generator) genTypeDecoder(t reflect.Type, out string, tags fieldTags, indent int) error {
 	ws := strings.Repeat("  ", indent)
 
-	unmarshalerIface := reflect.TypeOf((*easyjson.Unmarshaler)(nil)).Elem()
+	unmarshalerIface := reflect.TypeOf((*tinyjson.Unmarshaler)(nil)).Elem()
 	if reflect.PtrTo(t).Implements(unmarshalerIface) {
 		fmt.Fprintln(g.out, ws+"("+out+").UnmarshalEasyJSON(in)")
 		return nil
@@ -88,19 +88,19 @@ func (g *Generator) genTypeDecoder(t reflect.Type, out string, tags fieldTags, i
 // returns true if the type t implements one of the custom unmarshaler interfaces
 func hasCustomUnmarshaler(t reflect.Type) bool {
 	t = reflect.PtrTo(t)
-	return t.Implements(reflect.TypeOf((*easyjson.Unmarshaler)(nil)).Elem()) ||
+	return t.Implements(reflect.TypeOf((*tinyjson.Unmarshaler)(nil)).Elem()) ||
 		t.Implements(reflect.TypeOf((*json.Unmarshaler)(nil)).Elem()) ||
 		t.Implements(reflect.TypeOf((*encoding.TextUnmarshaler)(nil)).Elem())
 }
 
 func hasUnknownsUnmarshaler(t reflect.Type) bool {
 	t = reflect.PtrTo(t)
-	return t.Implements(reflect.TypeOf((*easyjson.UnknownsUnmarshaler)(nil)).Elem())
+	return t.Implements(reflect.TypeOf((*tinyjson.UnknownsUnmarshaler)(nil)).Elem())
 }
 
 func hasUnknownsMarshaler(t reflect.Type) bool {
 	t = reflect.PtrTo(t)
-	return t.Implements(reflect.TypeOf((*easyjson.UnknownsMarshaler)(nil)).Elem())
+	return t.Implements(reflect.TypeOf((*tinyjson.UnknownsMarshaler)(nil)).Elem())
 }
 
 // genTypeDecoderNoCheck generates decoding code for the type t.
@@ -303,13 +303,13 @@ func (g *Generator) genTypeDecoderNoCheck(t reflect.Type, out string, tags field
 			} else if g.interfaceIsJsonUnmarshaller(t) {
 				fmt.Fprintln(g.out, ws+out+".UnmarshalJSON(in.Raw())")
 			} else {
-				return fmt.Errorf("interface type %v not supported: only interface{} and easyjson/json Unmarshaler are allowed", t)
+				return fmt.Errorf("interface type %v not supported: only interface{} and tinyjson/json Unmarshaler are allowed", t)
 			}
 		} else {
 			// we enable this only when needed
 			g.imports["encoding/json"] = "json"
 
-			fmt.Fprintln(g.out, ws+"if m, ok := "+out+".(easyjson.Unmarshaler); ok {")
+			fmt.Fprintln(g.out, ws+"if m, ok := "+out+".(tinyjson.Unmarshaler); ok {")
 			fmt.Fprintln(g.out, ws+"m.UnmarshalEasyJSON(in)")
 			fmt.Fprintln(g.out, ws+"} else if m, ok := "+out+".(json.Unmarshaler); ok {")
 			fmt.Fprintln(g.out, ws+"_ = m.UnmarshalJSON(in.Raw())")
@@ -325,7 +325,7 @@ func (g *Generator) genTypeDecoderNoCheck(t reflect.Type, out string, tags field
 }
 
 func (g *Generator) interfaceIsEasyjsonUnmarshaller(t reflect.Type) bool {
-	return t.Implements(reflect.TypeOf((*easyjson.Unmarshaler)(nil)).Elem())
+	return t.Implements(reflect.TypeOf((*tinyjson.Unmarshaler)(nil)).Elem())
 }
 
 func (g *Generator) interfaceIsJsonUnmarshaller(t reflect.Type) bool {
@@ -576,7 +576,7 @@ func (g *Generator) genStructUnmarshaler(t reflect.Type) error {
 		fmt.Fprintln(g.out, "}")
 	}
 
-	fmt.Fprintln(g.out, "// UnmarshalEasyJSON supports easyjson.Unmarshaler interface")
+	fmt.Fprintln(g.out, "// UnmarshalEasyJSON supports tinyjson.Unmarshaler interface")
 	fmt.Fprintln(g.out, "func (v *"+typ+") UnmarshalEasyJSON(l *jlexer.Lexer) {")
 	fmt.Fprintln(g.out, "  "+fname+"(l, v)")
 	fmt.Fprintln(g.out, "}")

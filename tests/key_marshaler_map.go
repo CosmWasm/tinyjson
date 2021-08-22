@@ -13,7 +13,7 @@ func (f *KeyWithEncodingMarshaler) UnmarshalText(text []byte) error {
 	return nil
 }
 
-//easyjson:json
+//tinyjson:json
 type KeyWithEncodingMarshalers map[KeyWithEncodingMarshaler]string
 
 var mapWithEncodingMarshaler KeyWithEncodingMarshalers = KeyWithEncodingMarshalers{5: "hello"}

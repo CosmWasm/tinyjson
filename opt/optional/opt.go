@@ -31,7 +31,7 @@ func (v Optional) Get(deflt A) A {
 	return v.V
 }
 
-// MarshalEasyJSON does JSON marshaling using easyjson interface.
+// MarshalEasyJSON does JSON marshaling using tinyjson interface.
 func (v Optional) MarshalEasyJSON(w *jwriter.Writer) {
 	if v.Defined {
 		w.Optional(v.V)
@@ -40,7 +40,7 @@ func (v Optional) MarshalEasyJSON(w *jwriter.Writer) {
 	}
 }
 
-// UnmarshalEasyJSON does JSON unmarshaling using easyjson interface.
+// UnmarshalEasyJSON does JSON unmarshaling using tinyjson interface.
 func (v *Optional) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	if l.IsNull() {
 		l.Skip()

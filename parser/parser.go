@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	structComment     = "easyjson:json"
-	structSkipComment = "easyjson:skip"
+	structComment     = "tinyjson:json"
+	structSkipComment = "tinyjson:skip"
 )
 
 type Parser struct {

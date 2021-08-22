@@ -2,16 +2,16 @@ package tests
 
 import "github.com/CosmWasm/tinyjson"
 
-//easyjson:json
+//tinyjson:json
 type StructWithUnknownsProxy struct {
-	easyjson.UnknownFieldsProxy
+	tinyjson.UnknownFieldsProxy
 
 	Field1 string
 }
 
-//easyjson:json
+//tinyjson:json
 type StructWithUnknownsProxyWithOmitempty struct {
-	easyjson.UnknownFieldsProxy
+	tinyjson.UnknownFieldsProxy
 
 	Field1 string `json:",omitempty"`
 }

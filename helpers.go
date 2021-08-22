@@ -1,5 +1,5 @@
-// Package easyjson contains marshaler/unmarshaler interfaces and helper functions.
-package easyjson
+// Package tinyjson contains marshaler/unmarshaler interfaces and helper functions.
+package tinyjson
 
 import (
 	"io"
@@ -10,17 +10,17 @@ import (
 	"github.com/CosmWasm/tinyjson/jwriter"
 )
 
-// Marshaler is an easyjson-compatible marshaler interface.
+// Marshaler is an tinyjson-compatible marshaler interface.
 type Marshaler interface {
 	MarshalEasyJSON(w *jwriter.Writer)
 }
 
-// Marshaler is an easyjson-compatible unmarshaler interface.
+// Marshaler is an tinyjson-compatible unmarshaler interface.
 type Unmarshaler interface {
 	UnmarshalEasyJSON(w *jlexer.Lexer)
 }
 
-// MarshalerUnmarshaler is an easyjson-compatible marshaler/unmarshaler interface.
+// MarshalerUnmarshaler is an tinyjson-compatible marshaler/unmarshaler interface.
 type MarshalerUnmarshaler interface {
 	Marshaler
 	Unmarshaler

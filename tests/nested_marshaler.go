@@ -6,9 +6,9 @@ import (
 	"github.com/CosmWasm/tinyjson/jwriter"
 )
 
-//easyjson:json
+//tinyjson:json
 type NestedMarshaler struct {
-	Value  easyjson.MarshalerUnmarshaler
+	Value  tinyjson.MarshalerUnmarshaler
 	Value2 int
 }
 

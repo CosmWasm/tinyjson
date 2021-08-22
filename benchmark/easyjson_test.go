@@ -1,4 +1,4 @@
-// +build use_easyjson
+// +build use_tinyjson
 
 package benchmark
 
@@ -35,7 +35,7 @@ func BenchmarkEJ_Unmarshal_S(b *testing.B) {
 func BenchmarkEJ_Marshal_M(b *testing.B) {
 	var l int64
 	for i := 0; i < b.N; i++ {
-		data, err := easyjson.Marshal(&largeStructData)
+		data, err := tinyjson.Marshal(&largeStructData)
 		if err != nil {
 			b.Error(err)
 		}
@@ -47,7 +47,7 @@ func BenchmarkEJ_Marshal_M(b *testing.B) {
 func BenchmarkEJ_Marshal_L(b *testing.B) {
 	var l int64
 	for i := 0; i < b.N; i++ {
-		data, err := easyjson.Marshal(&xlStructData)
+		data, err := tinyjson.Marshal(&xlStructData)
 		if err != nil {
 			b.Error(err)
 		}

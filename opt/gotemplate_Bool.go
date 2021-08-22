@@ -30,7 +30,7 @@ func (v Bool) Get(deflt bool) bool {
 	return v.V
 }
 
-// MarshalEasyJSON does JSON marshaling using easyjson interface.
+// MarshalEasyJSON does JSON marshaling using tinyjson interface.
 func (v Bool) MarshalEasyJSON(w *jwriter.Writer) {
 	if v.Defined {
 		w.Bool(v.V)
@@ -39,7 +39,7 @@ func (v Bool) MarshalEasyJSON(w *jwriter.Writer) {
 	}
 }
 
-// UnmarshalEasyJSON does JSON unmarshaling using easyjson interface.
+// UnmarshalEasyJSON does JSON unmarshaling using tinyjson interface.
 func (v *Bool) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	if l.IsNull() {
 		l.Skip()

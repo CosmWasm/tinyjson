@@ -12,7 +12,7 @@ func TestStringIntern(t *testing.T) {
 	var i Intern
 	allocsPerRun := testing.AllocsPerRun(1000, func() {
 		i = Intern{}
-		err := easyjson.Unmarshal(data, &i)
+		err := tinyjson.Unmarshal(data, &i)
 		if err != nil {
 			t.Error(err)
 		}
@@ -27,7 +27,7 @@ func TestStringIntern(t *testing.T) {
 	var n NoIntern
 	allocsPerRun = testing.AllocsPerRun(1000, func() {
 		n = NoIntern{}
-		err := easyjson.Unmarshal(data, &n)
+		err := tinyjson.Unmarshal(data, &n)
 		if err != nil {
 			t.Error(err)
 		}

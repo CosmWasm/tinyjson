@@ -1,4 +1,4 @@
-package easyjson
+package tinyjson
 
 import (
 	jlexer "github.com/CosmWasm/tinyjson/jlexer"

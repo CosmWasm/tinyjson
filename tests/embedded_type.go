@@ -1,6 +1,6 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type EmbeddedType struct {
 	EmbeddedInnerType
 	Inner struct {
