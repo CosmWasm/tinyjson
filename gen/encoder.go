@@ -99,7 +99,7 @@ func (g *Generator) genTypeEncoder(t reflect.Type, in string, tags fieldTags, in
 
 	marshalerIface := reflect.TypeOf((*tinyjson.Marshaler)(nil)).Elem()
 	if reflect.PtrTo(t).Implements(marshalerIface) {
-		fmt.Fprintln(g.out, ws+"("+in+").MarshalEasyJSON(out)")
+		fmt.Fprintln(g.out, ws+"("+in+").MarshalTinyJSON(out)")
 		return nil
 	}
 
@@ -267,10 +267,10 @@ func (g *Generator) genTypeEncoderNoCheck(t reflect.Type, in string, tags fieldT
 	case reflect.Interface:
 		if t.NumMethod() != 0 {
 			if g.interfaceIsEasyjsonMarshaller(t) {
-				fmt.Fprintln(g.out, ws+in+".MarshalEasyJSON(out)")
+				fmt.Fprintln(g.out, ws+in+".MarshalTinyJSON(out)")
 			} else if g.interfaceIsJSONMarshaller(t) {
 				fmt.Fprintln(g.out, ws+"if m, ok := "+in+".(tinyjson.Marshaler); ok {")
-				fmt.Fprintln(g.out, ws+"  m.MarshalEasyJSON(out)")
+				fmt.Fprintln(g.out, ws+"  m.MarshalTinyJSON(out)")
 				fmt.Fprintln(g.out, ws+"} else {")
 				fmt.Fprintln(g.out, ws+in+".MarshalJSON(out)")
 				fmt.Fprintln(g.out, ws+"}")
@@ -279,7 +279,7 @@ func (g *Generator) genTypeEncoderNoCheck(t reflect.Type, in string, tags fieldT
 			}
 		} else {
 			fmt.Fprintln(g.out, ws+"if m, ok := "+in+".(tinyjson.Marshaler); ok {")
-			fmt.Fprintln(g.out, ws+"  m.MarshalEasyJSON(out)")
+			fmt.Fprintln(g.out, ws+"  m.MarshalTinyJSON(out)")
 			fmt.Fprintln(g.out, ws+"} else if m, ok := "+in+".(json.Marshaler); ok {")
 			fmt.Fprintln(g.out, ws+"  out.Raw(m.MarshalJSON())")
 			fmt.Fprintln(g.out, ws+"} else {")
@@ -461,8 +461,8 @@ func (g *Generator) genStructMarshaler(t reflect.Type) error {
 		fmt.Fprintln(g.out, "}")
 	}
 
-	fmt.Fprintln(g.out, "// MarshalEasyJSON supports tinyjson.Marshaler interface")
-	fmt.Fprintln(g.out, "func (v "+typ+") MarshalEasyJSON(w *jwriter.Writer) {")
+	fmt.Fprintln(g.out, "// MarshalTinyJSON supports tinyjson.Marshaler interface")
+	fmt.Fprintln(g.out, "func (v "+typ+") MarshalTinyJSON(w *jwriter.Writer) {")
 	fmt.Fprintln(g.out, "  "+fname+"(w, v)")
 	fmt.Fprintln(g.out, "}")
 

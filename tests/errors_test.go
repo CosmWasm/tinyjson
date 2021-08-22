@@ -39,7 +39,7 @@ func TestMultipleErrorsInt(t *testing.T) {
 
 		var v ErrorIntSlice
 
-		v.UnmarshalEasyJSON(&l)
+		v.UnmarshalTinyJSON(&l)
 
 		errors := l.GetNonFatalErrors()
 
@@ -79,7 +79,7 @@ func TestMultipleErrorsBool(t *testing.T) {
 		}
 
 		var v ErrorBoolSlice
-		v.UnmarshalEasyJSON(&l)
+		v.UnmarshalTinyJSON(&l)
 
 		errors := l.GetNonFatalErrors()
 
@@ -122,7 +122,7 @@ func TestMultipleErrorsUint(t *testing.T) {
 		}
 
 		var v ErrorUintSlice
-		v.UnmarshalEasyJSON(&l)
+		v.UnmarshalTinyJSON(&l)
 
 		errors := l.GetNonFatalErrors()
 
@@ -176,7 +176,7 @@ func TestMultipleErrorsStruct(t *testing.T) {
 			UseMultipleErrors: true,
 		}
 		var v ErrorStruct
-		v.UnmarshalEasyJSON(&l)
+		v.UnmarshalTinyJSON(&l)
 
 		errors := l.GetNonFatalErrors()
 
@@ -226,7 +226,7 @@ func TestMultipleErrorsNestedStruct(t *testing.T) {
 			UseMultipleErrors: true,
 		}
 		var v ErrorNestedStruct
-		v.UnmarshalEasyJSON(&l)
+		v.UnmarshalTinyJSON(&l)
 
 		errors := l.GetNonFatalErrors()
 
@@ -267,7 +267,7 @@ func TestMultipleErrorsIntMap(t *testing.T) {
 
 		var v ErrorIntMap
 
-		v.UnmarshalEasyJSON(&l)
+		v.UnmarshalTinyJSON(&l)
 
 		errors := l.GetNonFatalErrors()
 

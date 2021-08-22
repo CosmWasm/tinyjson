@@ -77,10 +77,10 @@ func (g *Generator) writeStub() error {
 			fmt.Fprintln(f, "func (*", t, ") UnmarshalJSON([]byte) error { return nil }")
 		}
 
-		fmt.Fprintln(f, "func (", t, ") MarshalEasyJSON(w *jwriter.Writer) {}")
-		fmt.Fprintln(f, "func (*", t, ") UnmarshalEasyJSON(l *jlexer.Lexer) {}")
+		fmt.Fprintln(f, "func (", t, ") MarshalTinyJSON(w *jwriter.Writer) {}")
+		fmt.Fprintln(f, "func (*", t, ") UnmarshalTinyJSON(l *jlexer.Lexer) {}")
 		fmt.Fprintln(f)
-		fmt.Fprintln(f, "type EasyJSON_exporter_"+t+" *"+t)
+		fmt.Fprintln(f, "type TinyJSON_exporter_"+t+" *"+t)
 	}
 	return nil
 }
@@ -140,7 +140,7 @@ func (g *Generator) writeMain() (path string, err error) {
 
 	sort.Strings(g.Types)
 	for _, v := range g.Types {
-		fmt.Fprintln(f, "  g.Add(pkg.EasyJSON_exporter_"+v+"(nil))")
+		fmt.Fprintln(f, "  g.Add(pkg.TinyJSON_exporter_"+v+"(nil))")
 	}
 
 	fmt.Fprintln(f, "  if err := g.Run(os.Stdout); err != nil {")

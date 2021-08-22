@@ -108,8 +108,8 @@ Besides standart json tag options like 'omitempty' the following are supported:
 
 ## Generated Marshaler/Unmarshaler Funcs
 
-For Go struct types, tinyjson generates the funcs `MarshalEasyJSON` /
-`UnmarshalEasyJSON` for marshaling/unmarshaling JSON. In turn, these satisfy
+For Go struct types, tinyjson generates the funcs `MarshalTinyJSON` /
+`UnmarshalTinyJSON` for marshaling/unmarshaling JSON. In turn, these satisfy
 the `tinyjson.Marshaler` and `tinyjson.Unmarshaler` interfaces and when used in
 conjunction with `tinyjson.Marshal` / `tinyjson.Unmarshal` avoid unnecessary
 reflection / type assertions during marshaling/unmarshaling to/from JSON for Go
@@ -122,8 +122,8 @@ interfaces. Please be aware that using the standard `json.Marshal` /
 performance penalty when compared to using `tinyjson.Marshal` /
 `tinyjson.Unmarshal`.
 
-Additionally, tinyjson exposes utility funcs that use the `MarshalEasyJSON` and
-`UnmarshalEasyJSON` for marshaling/unmarshaling to and from standard readers
+Additionally, tinyjson exposes utility funcs that use the `MarshalTinyJSON` and
+`UnmarshalTinyJSON` for marshaling/unmarshaling to and from standard readers
 and writers. For example, tinyjson provides `tinyjson.MarshalToHTTPResponseWriter`
 which marshals to the standard `http.ResponseWriter`. Please see the [GoDoc
 listing](https://godoc.org/github.com/CosmWasm/tinyjson) for the full listing of
@@ -131,7 +131,7 @@ utility funcs that are available.
 
 ## Controlling tinyjson Marshaling and Unmarshaling Behavior
 
-Go types can provide their own `MarshalEasyJSON` and `UnmarshalEasyJSON` funcs
+Go types can provide their own `MarshalTinyJSON` and `UnmarshalTinyJSON` funcs
 that satisfy the `tinyjson.Marshaler` / `tinyjson.Unmarshaler` interfaces.
 These will be used by `tinyjson.Marshal` and `tinyjson.Unmarshal` when defined
 for a Go type.

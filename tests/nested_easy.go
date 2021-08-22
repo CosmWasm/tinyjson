@@ -18,7 +18,7 @@ type NestedEasyMarshaler struct {
 
 var _ tinyjson.Marshaler = &NestedEasyMarshaler{}
 
-func (i *NestedEasyMarshaler) MarshalEasyJSON(w *jwriter.Writer) {
+func (i *NestedEasyMarshaler) MarshalTinyJSON(w *jwriter.Writer) {
 	// We use this method only to indicate that tinyjson.Marshaler
 	// interface was really used while encoding.
 	i.EasilyMarshaled = true

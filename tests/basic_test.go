@@ -191,7 +191,7 @@ func TestEncodingFlags(t *testing.T) {
 		{jwriter.NilSliceAsEmpty, EncodingFlagsTestSlice{}, `{"F":[]}`},
 	} {
 		w := &jwriter.Writer{Flags: test.Flags}
-		test.In.MarshalEasyJSON(w)
+		test.In.MarshalTinyJSON(w)
 
 		data, err := w.BuildBytes()
 		if err != nil {

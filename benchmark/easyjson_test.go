@@ -61,7 +61,7 @@ func BenchmarkEJ_Marshal_L_ToWriter(b *testing.B) {
 	out := &DummyWriter{}
 	for i := 0; i < b.N; i++ {
 		w := jwriter.Writer{}
-		xlStructData.MarshalEasyJSON(&w)
+		xlStructData.MarshalTinyJSON(&w)
 		if w.Error != nil {
 			b.Error(w.Error)
 		}
@@ -90,7 +90,7 @@ func BenchmarkEJ_Marshal_M_ToWriter(b *testing.B) {
 	out := &DummyWriter{}
 	for i := 0; i < b.N; i++ {
 		w := jwriter.Writer{}
-		largeStructData.MarshalEasyJSON(&w)
+		largeStructData.MarshalTinyJSON(&w)
 		if w.Error != nil {
 			b.Error(w.Error)
 		}
@@ -108,7 +108,7 @@ func BenchmarkEJ_Marshal_M_ToWriter_Parallel(b *testing.B) {
 		var l int64
 		for pb.Next() {
 			w := jwriter.Writer{}
-			largeStructData.MarshalEasyJSON(&w)
+			largeStructData.MarshalTinyJSON(&w)
 			if w.Error != nil {
 				b.Error(w.Error)
 			}
@@ -144,7 +144,7 @@ func BenchmarkEJ_Marshal_L_ToWriter_Parallel(b *testing.B) {
 		for pb.Next() {
 			w := jwriter.Writer{}
 
-			xlStructData.MarshalEasyJSON(&w)
+			xlStructData.MarshalTinyJSON(&w)
 			if w.Error != nil {
 				b.Error(w.Error)
 			}

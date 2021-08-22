@@ -12,12 +12,12 @@ import (
 
 // Marshaler is an tinyjson-compatible marshaler interface.
 type Marshaler interface {
-	MarshalEasyJSON(w *jwriter.Writer)
+	MarshalTinyJSON(w *jwriter.Writer)
 }
 
 // Marshaler is an tinyjson-compatible unmarshaler interface.
 type Unmarshaler interface {
-	UnmarshalEasyJSON(w *jlexer.Lexer)
+	UnmarshalTinyJSON(w *jlexer.Lexer)
 }
 
 // MarshalerUnmarshaler is an tinyjson-compatible marshaler/unmarshaler interface.
@@ -53,7 +53,7 @@ func Marshal(v Marshaler) ([]byte, error) {
 	}
 
 	w := jwriter.Writer{}
-	v.MarshalEasyJSON(&w)
+	v.MarshalTinyJSON(&w)
 	return w.BuildBytes()
 }
 
@@ -64,14 +64,14 @@ func MarshalToWriter(v Marshaler, w io.Writer) (written int, err error) {
 	}
 
 	jw := jwriter.Writer{}
-	v.MarshalEasyJSON(&jw)
+	v.MarshalTinyJSON(&jw)
 	return jw.DumpTo(w)
 }
 
 // Unmarshal decodes the JSON in data into the object.
 func Unmarshal(data []byte, v Unmarshaler) error {
 	l := jlexer.Lexer{Data: data}
-	v.UnmarshalEasyJSON(&l)
+	v.UnmarshalTinyJSON(&l)
 	return l.Error()
 }
 
@@ -82,6 +82,6 @@ func UnmarshalFromReader(r io.Reader, v Unmarshaler) error {
 		return err
 	}
 	l := jlexer.Lexer{Data: data}
-	v.UnmarshalEasyJSON(&l)
+	v.UnmarshalTinyJSON(&l)
 	return l.Error()
 }
