@@ -4,5 +4,5 @@ module example.com/user/project // end-line comment which should not break anyth
 go 1.13
 
 require (
-	github.com/mailru/easyjson v0.7.0
+	github.com/CosmWasm/tinyjson v0.7.0
 )

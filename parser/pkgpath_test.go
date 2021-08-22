@@ -19,9 +19,9 @@ func Test_getModulePath(t *testing.T) {
 			goModPath: "./testdata/comments_deps.go.mod",
 			want:      "example.com/user/project",
 		},
-		"actual easyjson go.mod": {
+		"actual tinyjson go.mod": {
 			goModPath: "../go.mod",
-			want:      "github.com/mailru/easyjson",
+			want:      "github.com/CosmWasm/tinyjson",
 		},
 		"invalid go.mod with missing module": {
 			goModPath: "./testdata/missing_module.go",

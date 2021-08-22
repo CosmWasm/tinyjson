@@ -3,7 +3,7 @@ package tests
 import (
 	"testing"
 
-	"github.com/mailru/easyjson/jwriter"
+	"github.com/CosmWasm/tinyjson/jwriter"
 )
 
 func TestHTML(t *testing.T) {
@@ -14,7 +14,7 @@ func TestHTML(t *testing.T) {
 	j := jwriter.Writer{
 		NoEscapeHTML: false,
 	}
-	s.MarshalEasyJSON(&j)
+	s.MarshalTinyJSON(&j)
 
 	data, _ := j.BuildBytes()
 
@@ -23,7 +23,7 @@ func TestHTML(t *testing.T) {
 	}
 
 	j.NoEscapeHTML = true
-	s.MarshalEasyJSON(&j)
+	s.MarshalTinyJSON(&j)
 
 	data, _ = j.BuildBytes()
 

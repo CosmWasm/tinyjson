@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"unicode/utf8"
 
-	"github.com/mailru/easyjson/buffer"
+	"github.com/CosmWasm/tinyjson/buffer"
 )
 
 // Flags describe various encoding options. The behavior may be actually implemented in the encoder, but

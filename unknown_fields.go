@@ -1,8 +1,8 @@
-package easyjson
+package tinyjson
 
 import (
-	jlexer "github.com/mailru/easyjson/jlexer"
-	"github.com/mailru/easyjson/jwriter"
+	jlexer "github.com/CosmWasm/tinyjson/jlexer"
+	"github.com/CosmWasm/tinyjson/jwriter"
 )
 
 // UnknownFieldsProxy implemets UnknownsUnmarshaler and UnknownsMarshaler

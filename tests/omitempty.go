@@ -1,6 +1,6 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type OmitEmptyDefault struct {
 	Field string
 	Str   string

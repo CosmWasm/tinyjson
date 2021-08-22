@@ -1,12 +1,12 @@
-// +build use_easyjson
+// +build use_tinyjson
 
 package benchmark
 
 import (
 	"testing"
 
-	"github.com/mailru/easyjson"
-	"github.com/mailru/easyjson/jwriter"
+	"github.com/CosmWasm/tinyjson"
+	"github.com/CosmWasm/tinyjson/jwriter"
 )
 
 func BenchmarkEJ_Unmarshal_M(b *testing.B) {
@@ -35,7 +35,7 @@ func BenchmarkEJ_Unmarshal_S(b *testing.B) {
 func BenchmarkEJ_Marshal_M(b *testing.B) {
 	var l int64
 	for i := 0; i < b.N; i++ {
-		data, err := easyjson.Marshal(&largeStructData)
+		data, err := tinyjson.Marshal(&largeStructData)
 		if err != nil {
 			b.Error(err)
 		}
@@ -47,7 +47,7 @@ func BenchmarkEJ_Marshal_M(b *testing.B) {
 func BenchmarkEJ_Marshal_L(b *testing.B) {
 	var l int64
 	for i := 0; i < b.N; i++ {
-		data, err := easyjson.Marshal(&xlStructData)
+		data, err := tinyjson.Marshal(&xlStructData)
 		if err != nil {
 			b.Error(err)
 		}
@@ -61,7 +61,7 @@ func BenchmarkEJ_Marshal_L_ToWriter(b *testing.B) {
 	out := &DummyWriter{}
 	for i := 0; i < b.N; i++ {
 		w := jwriter.Writer{}
-		xlStructData.MarshalEasyJSON(&w)
+		xlStructData.MarshalTinyJSON(&w)
 		if w.Error != nil {
 			b.Error(w.Error)
 		}
@@ -90,7 +90,7 @@ func BenchmarkEJ_Marshal_M_ToWriter(b *testing.B) {
 	out := &DummyWriter{}
 	for i := 0; i < b.N; i++ {
 		w := jwriter.Writer{}
-		largeStructData.MarshalEasyJSON(&w)
+		largeStructData.MarshalTinyJSON(&w)
 		if w.Error != nil {
 			b.Error(w.Error)
 		}
@@ -108,7 +108,7 @@ func BenchmarkEJ_Marshal_M_ToWriter_Parallel(b *testing.B) {
 		var l int64
 		for pb.Next() {
 			w := jwriter.Writer{}
-			largeStructData.MarshalEasyJSON(&w)
+			largeStructData.MarshalTinyJSON(&w)
 			if w.Error != nil {
 				b.Error(w.Error)
 			}
@@ -144,7 +144,7 @@ func BenchmarkEJ_Marshal_L_ToWriter_Parallel(b *testing.B) {
 		for pb.Next() {
 			w := jwriter.Writer{}
 
-			xlStructData.MarshalEasyJSON(&w)
+			xlStructData.MarshalTinyJSON(&w)
 			if w.Error != nil {
 				b.Error(w.Error)
 			}

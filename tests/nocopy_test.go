@@ -5,7 +5,7 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/mailru/easyjson"
+	"github.com/CosmWasm/tinyjson"
 )
 
 // verifies if string pointer belongs to the given buffer or outside of it
@@ -27,7 +27,7 @@ func TestNocopy(t *testing.T) {
 	}
 	res := NocopyStruct{}
 
-	err := easyjson.Unmarshal(data, &res)
+	err := tinyjson.Unmarshal(data, &res)
 	if err != nil {
 		t.Error(err)
 	}
@@ -45,7 +45,7 @@ func TestNocopy(t *testing.T) {
 	data = []byte(`{"b": "valueNoCopy"}`)
 	res = NocopyStruct{}
 	allocsPerRun := testing.AllocsPerRun(1000, func() {
-		err := easyjson.Unmarshal(data, &res)
+		err := tinyjson.Unmarshal(data, &res)
 		if err != nil {
 			t.Error(err)
 		}
@@ -59,7 +59,7 @@ func TestNocopy(t *testing.T) {
 
 	data = []byte(`{"a": "valueNoCopy"}`)
 	allocsPerRun = testing.AllocsPerRun(1000, func() {
-		err := easyjson.Unmarshal(data, &res)
+		err := tinyjson.Unmarshal(data, &res)
 		if err != nil {
 			t.Error(err)
 		}

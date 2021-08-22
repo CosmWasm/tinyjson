@@ -1,11 +1,11 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type NoIntern struct {
 	Field string `json:"field"`
 }
 
-//easyjson:json
+//tinyjson:json
 type Intern struct {
 	Field string `json:"field,intern"`
 }

@@ -1,15 +1,15 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type ErrorIntSlice []int
 
-//easyjson:json
+//tinyjson:json
 type ErrorBoolSlice []bool
 
-//easyjson:json
+//tinyjson:json
 type ErrorUintSlice []uint
 
-//easyjson:json
+//tinyjson:json
 type ErrorStruct struct {
 	Int      int    `json:"int"`
 	String   string `json:"string"`
@@ -22,5 +22,5 @@ type ErrorNestedStruct struct {
 	Int         int         `json:"int"`
 }
 
-//easyjson:json
+//tinyjson:json
 type ErrorIntMap map[uint32]string

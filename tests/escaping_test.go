@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/mailru/easyjson"
+	"github.com/CosmWasm/tinyjson"
 )
 
 func TestStrFieldsUnescaping(t *testing.T) {
@@ -48,7 +48,7 @@ func TestStrFieldsUnescaping(t *testing.T) {
 
 	for i, c := range cases {
 		var val EscStringStruct
-		err := easyjson.Unmarshal([]byte(c.data), &val)
+		err := tinyjson.Unmarshal([]byte(c.data), &val)
 		if err != nil {
 			t.Error(err)
 		}
@@ -79,7 +79,7 @@ func TestIntFieldsUnescaping(t *testing.T) {
 
 	for i, c := range cases {
 		var val EscIntStruct
-		err := easyjson.Unmarshal([]byte(c.data), &val)
+		err := tinyjson.Unmarshal([]byte(c.data), &val)
 		if err != nil {
 			t.Error(err)
 		}

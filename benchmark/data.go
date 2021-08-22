@@ -1,4 +1,4 @@
-// Package benchmark provides a simple benchmark for easyjson against default serialization and ffjson.
+// Package benchmark provides a simple benchmark for tinyjson against default serialization and ffjson.
 // The data example is taken from https://dev.twitter.com/rest/reference/get/search/tweets
 package benchmark
 
@@ -39,7 +39,7 @@ type Hashtag struct {
 	Text    string `json:"text"`
 }
 
-//easyjson:json
+//tinyjson:json
 type Entities struct {
 	Hashtags     []Hashtag `json:"hashtags"`
 	Urls         []*string `json:"urls"`
@@ -136,13 +136,13 @@ type Status struct {
 	User                 User           `json:"user"`
 }
 
-//easyjson:json
+//tinyjson:json
 type LargeStruct struct {
 	SearchMetadata SearchMetadata `json:"search_metadata"`
 	Statuses       []Status       `json:"statuses"`
 }
 
-//easyjson:json
+//tinyjson:json
 type XLStruct struct {
 	Data []LargeStruct
 }

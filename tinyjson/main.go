@@ -8,12 +8,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/mailru/easyjson/bootstrap"
+	"github.com/CosmWasm/tinyjson/bootstrap"
 	// Reference the gen package to be friendly to vendoring tools,
 	// as it is an indirect dependency.
 	// (The temporary bootstrapping code uses it.)
-	_ "github.com/mailru/easyjson/gen"
-	"github.com/mailru/easyjson/parser"
+	_ "github.com/CosmWasm/tinyjson/gen"
+	"github.com/CosmWasm/tinyjson/parser"
 )
 
 var buildTags = flag.String("build_tags", "", "build tags to add to generated file")
@@ -45,12 +45,12 @@ func generate(fname string) (err error) {
 
 	var outName string
 	if fInfo.IsDir() {
-		outName = filepath.Join(fname, p.PkgName+"_easyjson.go")
+		outName = filepath.Join(fname, p.PkgName+"_tinyjson.go")
 	} else {
 		if s := strings.TrimSuffix(fname, ".go"); s == fname {
 			return errors.New("Filename must end in '.go'")
 		} else {
-			outName = s + "_easyjson.go"
+			outName = s + "_tinyjson.go"
 		}
 	}
 

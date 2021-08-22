@@ -1,6 +1,6 @@
 package tests
 
-//easyjson:json
+//tinyjson:json
 type SnakeStruct struct {
 	WeirdHTTPStuff   bool
 	CustomNamedField string `json:"cUsToM"`

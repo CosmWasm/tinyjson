@@ -1,14 +1,14 @@
 package tests
 
 import (
-	"github.com/mailru/easyjson"
-	"github.com/mailru/easyjson/jlexer"
-	"github.com/mailru/easyjson/jwriter"
+	"github.com/CosmWasm/tinyjson"
+	"github.com/CosmWasm/tinyjson/jlexer"
+	"github.com/CosmWasm/tinyjson/jwriter"
 )
 
-//easyjson:json
+//tinyjson:json
 type NestedMarshaler struct {
-	Value  easyjson.MarshalerUnmarshaler
+	Value  tinyjson.MarshalerUnmarshaler
 	Value2 int
 }
 
@@ -16,10 +16,10 @@ type StructWithMarshaler struct {
 	Value int
 }
 
-func (s *StructWithMarshaler) UnmarshalEasyJSON(w *jlexer.Lexer) {
+func (s *StructWithMarshaler) UnmarshalTinyJSON(w *jlexer.Lexer) {
 	s.Value = w.Int()
 }
 
-func (s *StructWithMarshaler) MarshalEasyJSON(w *jwriter.Writer) {
+func (s *StructWithMarshaler) MarshalTinyJSON(w *jwriter.Writer) {
 	w.Int(s.Value)
 }

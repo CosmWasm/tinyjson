@@ -5,8 +5,8 @@ package opt
 import (
 	"fmt"
 
-	"github.com/mailru/easyjson/jlexer"
-	"github.com/mailru/easyjson/jwriter"
+	"github.com/CosmWasm/tinyjson/jlexer"
+	"github.com/CosmWasm/tinyjson/jwriter"
 )
 
 // template type Optional(A)
@@ -30,8 +30,8 @@ func (v Uint16) Get(deflt uint16) uint16 {
 	return v.V
 }
 
-// MarshalEasyJSON does JSON marshaling using easyjson interface.
-func (v Uint16) MarshalEasyJSON(w *jwriter.Writer) {
+// MarshalTinyJSON does JSON marshaling using tinyjson interface.
+func (v Uint16) MarshalTinyJSON(w *jwriter.Writer) {
 	if v.Defined {
 		w.Uint16(v.V)
 	} else {
@@ -39,8 +39,8 @@ func (v Uint16) MarshalEasyJSON(w *jwriter.Writer) {
 	}
 }
 
-// UnmarshalEasyJSON does JSON unmarshaling using easyjson interface.
-func (v *Uint16) UnmarshalEasyJSON(l *jlexer.Lexer) {
+// UnmarshalTinyJSON does JSON unmarshaling using tinyjson interface.
+func (v *Uint16) UnmarshalTinyJSON(l *jlexer.Lexer) {
 	if l.IsNull() {
 		l.Skip()
 		*v = Uint16{}
@@ -53,14 +53,14 @@ func (v *Uint16) UnmarshalEasyJSON(l *jlexer.Lexer) {
 // MarshalJSON implements a standard json marshaler interface.
 func (v Uint16) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	v.MarshalEasyJSON(&w)
+	v.MarshalTinyJSON(&w)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // UnmarshalJSON implements a standard json unmarshaler interface.
 func (v *Uint16) UnmarshalJSON(data []byte) error {
 	l := jlexer.Lexer{Data: data}
-	v.UnmarshalEasyJSON(&l)
+	v.UnmarshalTinyJSON(&l)
 	return l.Error()
 }
 
