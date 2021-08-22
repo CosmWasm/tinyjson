@@ -1,4 +1,10 @@
-# tinyjson [![Build Status](https://travis-ci.org/CosmWasm/tinyjson.svg?branch=master)](https://travis-ci.org/CosmWasm/tinyjson) [![Go Report Card](https://goreportcard.com/badge/github.com/CosmWasm/tinyjson)](https://goreportcard.com/report/github.com/CosmWasm/tinyjson)
+# tinyjson 
+[![Build Status](https://circleci.com/gh/CosmWasm/tinyjson.svg?style=shield)](https://circleci.com/gh/CosmWasm/tinyjson) |
+[![Go Report Card](https://goreportcard.com/badge/github.com/CosmWasm/tinyjson)](https://goreportcard.com/report/github.com/CosmWasm/tinyjson)
+
+Forked from [easyjson](https://github.com/mailru/tinyjson), which developed all the amazing
+codegen technology and optimizations. This fork modifies the repo to target TinyGo execution
+(no encoding/json or net or reflect), and particularly CosmWasm contracts (which have no floats).
 
 Package tinyjson provides a fast and easy way to marshal/unmarshal Go structs
 to/from JSON without the use of reflection. In performance tests, tinyjson
@@ -301,6 +307,9 @@ marshaling.
 
 `ffjson` results are from February 4th, 2016, using the latest `ffjson` and go1.6.
 `go/codec` results are from March 4th, 2016, using the latest `go/codec` and go1.6.
+
+Note these benchmarks are outdated and currently don't run (I broke them removing
+the floats). We should get them back to compare with the current minimal state of tinyjson.
 
 #### Unmarshaling
 
